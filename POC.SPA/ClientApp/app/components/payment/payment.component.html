@@ -2,6 +2,15 @@
     <div class="panel-heading">Post payment</div>
     <div class="panel-body">
         <div class="container">
+            <div class="alert">
+                {{errorMessage}}
+                <br/>
+               <ul class="alert-info">
+                   <li *ngFor="let message of serverMessage">
+                       <i>{{message}}</i>
+                   </li>
+               </ul>
+            </div>
             <form #paymentForm="ngForm">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="BSB Number" [(ngModel)]="payment.BsbNumber" name="BsbNumber" required minlength="6" maxlength="6">

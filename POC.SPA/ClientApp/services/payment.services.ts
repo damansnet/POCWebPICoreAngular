@@ -35,11 +35,11 @@ export class PaymentService {
      }
 
      handleObservable(error: Response) {
-         debugger;
-         console.log("Error");
-         console.log(JSON.stringify(error));
+         
+         
+         
          //alert(JSON.stringify(error));
-         return JSON.stringify(error);
+         return Observable.throw(JSON.stringify(error));
      }
 
 }

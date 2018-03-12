@@ -12,34 +12,53 @@ export class PaymentComponent {
 
     operationInfo: OperationInfo;
     payment: Payment;
-    errorMessage: object;
+    errorMessage: any;
+    serverMessage: Array<string>;
+    statusMessage: string;
     data: Array<string>;
     constructor(private paymentService: PaymentService) {
         this.payment = new Payment();
         this.data = new Array();
         this.operationInfo = new OperationInfo();
-        this.errorMessage = new Object();
+        this.errorMessage = {};
+        this.statusMessage = "";
+        this.serverMessage = new Array();
     }
 
     SaveClicked() {
 
-        
-        
         var objResult = this.paymentService.savePayment(this.payment).subscribe(r => {
-
             this.payment = r;
             //this.ResetPayment();
-        }, (error) => this.ProcessError(error));
-        console.log(JSON.stringify(this.errorMessage));
-        debugger;
+        }, (error) => this.ProcessError(error));// this.errorMessage = error);
+       
+        //debugger;
         
     }
 
-    ProcessError(res: Response) {
+    ProcessError(res: any) {
      
-       // res.json().then(body => alert(body));
-        
-      alert();
+        // res.json().then(body => alert(body));
+        debugger;  
+        this.errorMessage = res;
+        console.log("after error : " + this.errorMessage);
+        JSON.parse( this.errorMessage.toString(), (key, value) => {
+            if (key == "_body") {
+                //console.log(key + " , " + value);
+                let _bodyItem: any = value;
+                this.errorMessage = _bodyItem;
+                console.log(this.errorMessage)
+                // this.statusMessage = v[0];
+                JSON.parse(this.errorMessage, (key, value) => {
+                    this.serverMessage.push(value);
+
+                   
+                });
+            }
+            
+        });
+
+        debugger;
     }
     ResetPayment() {
         debugger;
