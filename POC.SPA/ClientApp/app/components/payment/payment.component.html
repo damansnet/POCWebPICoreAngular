@@ -1,0 +1,29 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">Post payment</div>
+    <div class="panel-body">
+        <div class="container">
+            <form #paymentForm="ngForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="BSB Number" [(ngModel)]="payment.BsbNumber" name="BsbNumber" required minlength="6" maxlength="6">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Account Number" [(ngModel)]="payment.AccountNumber" name="AccountNumber" required minLength="9" maxlength="12">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" [(ngModel)]="payment.AccountName" name="AccountName" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="payment.Reference" placeholder="Reference" name="Reference">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="payment.Amount" placeholder="Amount" name="Amount" required >
+                </div>
+                <div class="form-group text-right">
+                    <button type="button" class="btn btn-primary" [disabled]="!paymentForm.form.valid" (click)="SaveClicked()">Save </button>
+                    <button type="button" class="btn btn-default" (click)="ResetPayment()">Reset</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
